@@ -1,22 +1,21 @@
 FROM alpine:edge
 
-MAINTAINER xujinkai <jack777@xujinkai.net>
+MAINTAINER mushanyoung <mushanyoung@gmail.com>
 
-RUN apk update && \
-	apk add --no-cache --update bash && \
-	mkdir -p /conf && \
-	mkdir -p /conf-copy && \
-	mkdir -p /data && \
-	apk add --no-cache --update aria2 && \
-	apk add git && \
-	git clone https://github.com/ziahamza/webui-aria2 /aria2-webui && \
-    rm /aria2-webui/.git* -rf && \
-    apk del git && \
-	apk add --update darkhttpd
+RUN mkdir -p /conf /conf-copy /data
 
-ADD files/start.sh /conf-copy/start.sh
-ADD files/aria2.conf /conf-copy/aria2.conf
-ADD files/on-complete.sh /conf-copy/on-complete.sh
+RUN apk update \
+ && apk add --no-cache tzdata aria2 darkhttpd jq s6
+
+RUN apk add --no-cache --virtual .install-deps curl unzip \
+  && mkdir -p /aria2-ng \
+  && curl -o /aria2-ng.zip -L $(curl -sX GET "https://api.github.com/repos/mayswind/AriaNg/releases/latest" | jq -r '.assets[0].browser_download_url') \
+  && unzip /aria2-ng.zip -d /aria2-ng \
+  && rm /aria2-ng.zip \
+  && apk del .install-deps
+
+ADD start.sh /conf-copy/start.sh
+ADD aria2.conf /conf-copy/aria2.conf
 
 RUN chmod +x /conf-copy/start.sh
 
