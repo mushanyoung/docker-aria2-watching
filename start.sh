@@ -20,6 +20,6 @@ chown $PUID:$PGID /logs.txt
 
 s6-setuidgid $PUID:$PGID inotifywait --monitor --event create --format '/watch/%f' --exclude '.added$' '/watch' | xargs -n1 -I {} sh -c 'echo "{}" && DIANA_SECRET_TOKEN=$SECRET /bin/diana add "{}" && mv "{}" "{}.added"' &
 
-s6-setuidgid $PUID:$PGID darkhttpd /aria2-ng --port 80 &
+s6-setuidgid $PUID:$PGID darkhttpd /webui --port 8080 &
 
 exec s6-setuidgid $PUID:$PGID aria2c --conf-path=/conf/aria2.conf --log=/logs.txt
