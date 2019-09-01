@@ -2,7 +2,8 @@ FROM alpine:edge
 
 MAINTAINER mushanyoung <mushanyoung@gmail.com>
 
-RUN mkdir -p /conf /conf-copy /data /watch /webui
+RUN mkdir -p /conf /data /watch
+RUN mkdir -p /conf-copy /webui
 RUN apk update && apk add --no-cache aria2 darkhttpd jq s6 inotify-tools python3
 
 RUN apk add --no-cache --virtual .install-deps curl unzip \
@@ -18,9 +19,9 @@ ADD start.sh /conf-copy/start.sh
 RUN chmod +x /conf-copy/start.sh
 
 WORKDIR /
+VOLUME ["/conf"]
 VOLUME ["/data"]
 VOLUME ["/watch"]
-VOLUME ["/conf"]
 EXPOSE 6800
 EXPOSE 8080
 
