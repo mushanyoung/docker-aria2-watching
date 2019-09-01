@@ -6,7 +6,7 @@ ADD aria2.conf start.sh https://raw.githubusercontent.com/baskerville/diana/mast
 
 RUN mkdir -p /conf /data /watch \
              /aria2-watching /aria2-watching/ui \
- && chmod +x /aria2-watching/diana /aria2-watching/start.sh \
+ && chmod 755 /aria2-watching/diana /aria2-watching/start.sh \
  && apk add --no-cache s6 aria2 darkhttpd inotify-tools python3 \
  && apk add --no-cache --virtual .install-deps curl jq unzip \
  && curl -o /aria2ng.zip -L $(curl -sX GET 'https://api.github.com/repos/mayswind/AriaNg/releases/latest' | jq -r '.assets[0].browser_download_url') \
