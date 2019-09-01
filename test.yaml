@@ -1,0 +1,22 @@
+schemaVersion: "2.0.0"
+
+metadataTest:
+  exposedPorts: ["6800", "8080"]
+  volumes: ["/conf", "/data", "/watch"]
+  cmd: ["/aria2-watching/start.sh"]
+
+fileExistenceTests:
+  - name: '/aria2-watching/start.sh'
+    path: '/aria2-watching/start.sh'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: '/aria2-watching/diana'
+    path: '/aria2-watching/diana'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: '/aria2-watching/aria2.conf'
+    path: '/aria2-watching/aria2.conf'
+    shouldExist: true
+  - name: '/aria2-watching/ui/index.html'
+    path: '/aria2-watching/ui/index.html'
+    shouldExist: true

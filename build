@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker build -t mushanyoung/docker-aria2-watching "$(dirname $0)"

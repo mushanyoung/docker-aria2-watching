@@ -1,0 +1,3 @@
+#!/bin/sh
+
+container-structure-test test -i mushanyoung/docker-aria2-watching -c "$(dirname $0)/test.yaml"
