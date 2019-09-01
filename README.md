@@ -17,16 +17,16 @@ following examples.
 
 ### Docker Run
 ```
-docker run -d --name aria2 \
--p 6800:6800 \
--p 8080:8080 \
--v /DOWNLOAD:/data \
--v /CONFIG:/conf \
--v /WATCH:/watch \
--e SECRET=RPC_SECRET_CODE \
--e PUID=1000 \
--e PGID=1000 \
-mushanyoung/aria2-watching:latest
+$ docker run -d --name aria2 \
+    -p 6800:6800 \
+    -p 8080:8080 \
+    -v /DOWNLOAD:/data \
+    -v /CONFIG:/conf \
+    -v /WATCH:/watch \
+    -e SECRET=RPC_SECRET_CODE \
+    -e PUID=1000 \
+    -e PGID=1000 \
+  mushanyoung/aria2-watching:latest
 ```
 
 ### Docker Compose
