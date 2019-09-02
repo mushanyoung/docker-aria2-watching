@@ -12,7 +12,7 @@ Dockerized aria2 daemon service with webui, watching torrents.
 - %WATCH_DIR% must be different to %DATA_DIR%. Torrent files being added to the it will be automatically added as aria2 new task.
 - %SECRET% (default: watching) is for communicating with aria2 daemon service.
 - %PUID% (default: 1000) and %PGID% (default: 1000) specify the uid and gid of the data owner.
-- By default, [Aria2Ng](https://github.com/mayswind/AriaNg) is used as the webui. Set environment variable WEB_HOME=/webui-aria2 if you prefer [WebUI-Aria2](https://github.com/ziahamza/webui-aria2).
+- By default, [AriaNg](https://github.com/mayswind/AriaNg) is used as the webui. Set environment variable `WEB_HOME=/webui-aria2` if you prefer [WebUI-Aria2](https://github.com/ziahamza/webui-aria2).
 
 ### Docker Run
 
