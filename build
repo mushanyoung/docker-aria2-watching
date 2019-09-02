@@ -1,3 +1,12 @@
 #!/bin/sh
 
-docker build -t mushanyoung/docker-aria2-watching "$(dirname $0)"
+DOCKER_IMAGE_NAME=mushanyoung/docker-aria2-watching
+
+docker build -t $DOCKER_IMAGE_NAME "$(dirname $0)"
+
+if type container-structure-test >/dev/null; then
+  container-structure-test test -i $DOCKER_IMAGE_NAME -c "$(dirname $0)/test.yaml"
+else
+  echo Install container-structure-test to enable test.
+  echo https://github.com/GoogleContainerTools/container-structure-test
+fi
