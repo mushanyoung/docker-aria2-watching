@@ -17,4 +17,5 @@ RUN mkdir -p /conf /data /watch \
 VOLUME /conf /data /watch
 EXPOSE 6800/tcp 8080/tcp
 
-CMD ["/aria2-watching/start.sh"]
+ENTRYPOINT ["/aria2-watching/start.sh"]
+CMD ["aria2c", "--conf-path=/conf/aria2.conf", "--log=/conf/aria2c.log"]
