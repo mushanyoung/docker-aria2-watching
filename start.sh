@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-export PUID=${PUID:-0}
-export PGID=${PGID:-0}
-export SECRET="${SECRET:-watching}"
+PUID=${PUID:-0}
+PGID=${PGID:-0}
+SECRET="${SECRET:-watching}"
 export DIANA_SECRET_TOKEN="${SECRET}"
 
 [ -f /conf/aria2.conf ] || cp /aria2-watching/aria2.conf /conf/aria2.conf
