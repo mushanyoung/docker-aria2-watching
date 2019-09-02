@@ -1,5 +1,7 @@
 schemaVersion: "2.0.0"
 
+# https://github.com/GoogleContainerTools/container-structure-test
+
 metadataTest:
   exposedPorts: ["6800", "8080"]
   volumes: ["/conf", "/data", "/watch"]
