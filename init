@@ -9,8 +9,8 @@ export DIANA_SECRET_TOKEN="${SECRET}"
 [ -f /conf/aria2.conf ] || cp /aria2.conf /conf/aria2.conf
 grep '^rpc-secret=' /conf/aria2.conf &>/dev/null || echo "rpc-secret=${SECRET}" >> /conf/aria2.conf
 
-touch /conf/aria2.session /conf/aria2c.log /conf/darkhttpd.log /conf/dht.dat /conf/dht6.dat
-chown $PUID:$PGID /conf/aria2.conf /conf/aria2.session /conf/aria2c.log /conf/darkhttpd.log /conf/dht.dat /conf/dht6.dat
+touch /conf/aria2.session /conf/aria2.log /conf/darkhttpd.log /conf/dht.dat /conf/dht6.dat
+chown $PUID:$PGID /conf/aria2.conf /conf/aria2.session /conf/aria2.log /conf/darkhttpd.log /conf/dht.dat /conf/dht6.dat
 
 s6-setuidgid $PUID:$PGID darkhttpd /ui --daemon --port 8080 --log /conf/darkhttpd.log
 

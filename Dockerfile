@@ -17,4 +17,4 @@ VOLUME /conf /data /watch
 EXPOSE 6800/tcp 8080/tcp
 
 ENTRYPOINT ["/init"]
-CMD ["aria2c", "--conf-path=/conf/aria2.conf", "--log=/conf/aria2c.log"]
+CMD ["aria2c", "--conf-path=/conf/aria2.conf", "--log=/conf/aria2.log"]
