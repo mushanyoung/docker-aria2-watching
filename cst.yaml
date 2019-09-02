@@ -19,6 +19,9 @@ fileExistenceTests:
   - name: '/aria2.conf'
     path: '/aria2.conf'
     shouldExist: true
-  - name: '/ui/index.html'
-    path: '/ui/index.html'
+  - name: '/ariang/index.html'
+    path: '/ariang/index.html'
+    shouldExist: true
+  - name: '/webui-aria2/index.html'
+    path: '/webui-aria2/index.html'
     shouldExist: true
