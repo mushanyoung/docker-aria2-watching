@@ -5,20 +5,20 @@ schemaVersion: "2.0.0"
 metadataTest:
   exposedPorts: ["6800", "8080"]
   volumes: ["/conf", "/data", "/watch"]
-  entrypoint: ["/aria2-watching/start.sh"]
+  entrypoint: ["/init"]
 
 fileExistenceTests:
-  - name: '/aria2-watching/start.sh'
-    path: '/aria2-watching/start.sh'
+  - name: '/init'
+    path: '/init'
     shouldExist: true
     isExecutableBy: 'any'
-  - name: '/aria2-watching/diana'
-    path: '/aria2-watching/diana'
+  - name: '/diana'
+    path: '/diana'
     shouldExist: true
     isExecutableBy: 'any'
-  - name: '/aria2-watching/aria2.conf'
-    path: '/aria2-watching/aria2.conf'
+  - name: '/aria2.conf'
+    path: '/aria2.conf'
     shouldExist: true
-  - name: '/aria2-watching/ui/index.html'
-    path: '/aria2-watching/ui/index.html'
+  - name: '/ui/index.html'
+    path: '/ui/index.html'
     shouldExist: true
