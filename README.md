@@ -4,14 +4,14 @@ Dockerized aria2 daemon service with webui, watching torrents.
 
 ## Usage
 
-- Configure /DOWNLOAD, /CONFIG, /WATCH and RPC_SECRET_CODE in either of following examples.
+- Replace all variables wrapped in % % to use following examples.
 - Aria2 daemon service will be accessible over HTTP from port 6800 (or any port you mapped to).
 - WebUI, [Aria2Ng](https://github.com/mayswind/AriaNg) will be accessible over HTTP from port 8080 (or any port you mapped to).
-- Volume /data will be the default download path.
-- Volume /conf saves configs and logs.
-- Torrent files being added to /watch volume will be automatically added as aria2 tasks.
-- SECRET ('watching' if it is omitted) is for communicating with aria2 daemon service.
-- PUID and PGID can be specified by environment variables. If they're omitted, root will be used.
+- %CONFIG_DIR% saves configs and logs.
+- %DATA_DIR% will be the default download path.
+- %WATCH_DIR% must be different to %DATA_DIR%. Torrent files being added to the it will be automatically added as aria2 new task.
+- %SECRET% (default: watching) is for communicating with aria2 daemon service.
+- %PUID% (default: 1000) and %PGID% (default: 1000) specify the uid and gid of the data owner.
 
 ### Docker Run
 
@@ -19,12 +19,12 @@ Dockerized aria2 daemon service with webui, watching torrents.
 $ docker run -d --name aria2 \
     -p 6800:6800 \
     -p 8080:8080 \
-    -v /DOWNLOAD:/data \
-    -v /CONFIG:/conf \
-    -v /WATCH:/watch \
-    -e SECRET=RPC_SECRET_CODE \
-    -e PUID=1000 \
-    -e PGID=1000 \
+    -v %CONFIG_DIR%:/conf \
+    -v %DOWNLOAD_DIR%:/data \
+    -v %WATCH_DIR%:/watch \
+    -e SECRET=%SECRET% \
+    -e PUID=%PUID% \
+    -e PGID=%PGID% \
   mushanyoung/aria2-watching:latest
 ```
 
@@ -41,11 +41,11 @@ services:
       - "6800:6800"
       - "8080:8080"
     volumes:
-      - /DOWNLOAD:/data
-      - /CONFIG:/conf
-      - /WATCH:/watch
+      - %CONFIG_DIR%:/conf
+      - %DOWNLOAD_DIR%:/data
+      - %WATCH_DIR%:/watch
     environment:
-      SECRET: RPC_SECRET_CODE
-      PUID: 1000
-      PGID: 1000
+      SECRET: %SECRET%
+      PUID: %PUID%
+      PGID: %PGID%
 ```
