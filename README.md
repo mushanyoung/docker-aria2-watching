@@ -7,18 +7,18 @@ Dockerized aria2 daemon service with webui, watching torrents.
 - Replace all variables wrapped in % % to use following examples.
 - %CONFIG_DIR% saves configs and logs.
 - %DATA_DIR% will be the default download path.
-- %WATCH_DIR% must be different to %DATA_DIR%. Torrent files being added to the it will be automatically added as aria2 new task.
+- %WATCH_DIR% must be different to %DATA_DIR%. Torrent files being added to it will be automatically added as aria2 new tasks.
 - %SECRET% (default: watching) is for communicating with aria2 daemon service.
 - %PUID% (default: 1000) and %PGID% (default: 1000) specify the uid and gid of the data owner.
-- Aria2 daemon service will be accessible over HTTP from port 6800 (or any port you mapped to).
-- WebUI will be accessible over HTTP from port 8080 (or any port you mapped to). By default, it is [AriaNg](https://github.com/mayswind/AriaNg). Set environment variable `WEB_HOME=/webui-aria2` if you prefer [WebUI-Aria2](https://github.com/ziahamza/webui-aria2).
+- %ARIA_RPC_PORT% specifies the port where Aria2 daemon service will be accessible.
+- %WEBUI_PORT% specifies the port where WebUI will be accessible. By default, it is [AriaNg](https://github.com/mayswind/AriaNg). Set environment variable `WEB_HOME=/webui-aria2` if you prefer [WebUI-Aria2](https://github.com/ziahamza/webui-aria2).
 
 ### Docker Run
 
 ```
 $ docker run -d --name aria2 \
-    -p 6800:6800 \
-    -p 8080:8080 \
+    -p %ARIA_RPC_PORT%:6800 \
+    -p %WEBUI_PORT%:8080 \
     -v %CONFIG_DIR%:/conf \
     -v %DOWNLOAD_DIR%:/data \
     -v %WATCH_DIR%:/watch \
@@ -38,8 +38,8 @@ services:
     restart: unless-stopped
     network_mode: "bridge"
     ports:
-      - "6800:6800"
-      - "8080:8080"
+      - "%ARIA_RPC_PORT%:6800/tcp"
+      - "%WEBUI_PORT%:8080/tcp"
     volumes:
       - %CONFIG_DIR%:/conf
       - %DOWNLOAD_DIR%:/data
