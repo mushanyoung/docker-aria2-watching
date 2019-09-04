@@ -17,8 +17,8 @@ Dockerized aria2 daemon service with webui, watching torrents.
 
 ```
 $ docker run -d --name aria2 \
-    -p %ARIA_RPC_PORT%:6800 \
-    -p %WEBUI_PORT%:8080 \
+    -p %ARIA_RPC_PORT%:6800/tcp \
+    -p %WEBUI_PORT%:8080/tcp \
     -v %CONFIG_DIR%:/conf \
     -v %DOWNLOAD_DIR%:/data \
     -v %WATCH_DIR%:/watch \
