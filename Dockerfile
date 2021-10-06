@@ -2,11 +2,12 @@ FROM alpine:edge
 
 MAINTAINER mushanyoung <mushanyoung@gmail.com>
 
-ADD aria2.conf init https://raw.githubusercontent.com/baskerville/diana/master/diana /
+ADD aria2.conf init /
 
 RUN mkdir -p /conf /data /watch \
- && chmod 755 /diana /init \
- && apk add --upgrade --no-cache s6 aria2 darkhttpd inotify-tools python3 \
+ && chmod 755 /init \
+ && apk add --upgrade --no-cache s6 aria2 darkhttpd inotify-tools python3 py3-pip \
+ && pip install aria2p \
  && apk add --upgrade --no-cache --virtual .install-deps curl jq unzip git \
  && curl -o /aria2ng.zip -L $(curl -sX GET 'https:/api.github.com/repos/mayswind/AriaNg/releases/latest' | jq -r '.assets[0].browser_download_url') \
  && unzip /aria2ng.zip -d /ariang \

@@ -12,10 +12,6 @@ fileExistenceTests:
     path: '/init'
     shouldExist: true
     isExecutableBy: 'any'
-  - name: '/diana'
-    path: '/diana'
-    shouldExist: true
-    isExecutableBy: 'any'
   - name: '/aria2.conf'
     path: '/aria2.conf'
     shouldExist: true
