@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DOCKER_IMAGE_NAME=mushanyoung/docker-aria2-watching
+DOCKER_IMAGE_NAME=mushanyoung/aria2-watching
 
 docker build -t $DOCKER_IMAGE_NAME "$(dirname $0)"
 
