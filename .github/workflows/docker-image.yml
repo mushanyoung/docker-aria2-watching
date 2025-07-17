@@ -7,11 +7,35 @@ on:
     branches: [ "master" ]
 
 jobs:
-
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
+    # Grant permissions to write to the container registry
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag mushanyoung/aria2-watching
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Log in to the GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ghcr.io/${{ github.repository }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        # Push only when the event is a push to the master branch
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
